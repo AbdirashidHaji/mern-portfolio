@@ -1,13 +1,13 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Instagram, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/abdirashid', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/abdirashid', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/abdirashid', label: 'Twitter' },
+    { icon: Github, href: 'https://github.com/AbdirashidHaji', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/abdirashid-mohamed-haji-338723244/', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/abdulrashidmhaji', label: 'Instagram' },
     { icon: Mail, href: 'mailto:abdirashid.ke@gmail.com', label: 'Email' },
   ];
 

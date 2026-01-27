@@ -45,12 +45,12 @@ app.use((req, res, next) => {
   if (req.body) {
     sanitizeObject(req.body);
   }
-  
+
   // Sanitize request query
   if (req.query) {
     sanitizeObject(req.query);
   }
-  
+
   next();
 });
 
@@ -86,8 +86,8 @@ if (process.env.NODE_ENV === 'development') {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ 
-    success: true, 
+  res.status(200).json({
+    success: true,
     message: 'Server is running',
     timestamp: new Date().toISOString()
   });
@@ -112,24 +112,30 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 // Start server
+const isProduction = process.env.NODE_ENV === 'production';
+
 const startServer = async () => {
   try {
     console.log('🔄 Attempting to connect to MongoDB...');
     await connectDB();
     console.log('✅ Database connected, initializing admin...');
     await initAdmin();
-    
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`🌐 Client URL: ${process.env.CLIENT_URL}`);
-      console.log(`📧 Admin Email: ${process.env.ADMIN_EMAIL}`);
-    });
+
+    if (!isProduction) {
+      const PORT = process.env.PORT || 5000;
+      app.listen(PORT, () => {
+        console.log(`🚀 Server running on port ${PORT}`);
+        console.log(`🌐 Client URL: ${process.env.CLIENT_URL}`);
+        console.log(`📧 Admin Email: ${process.env.ADMIN_EMAIL}`);
+      });
+    }
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
     console.error('Full error:', error);
-    process.exit(1);
+    if (!isProduction) process.exit(1);
   }
 };
 
 startServer();
+
+export default app;

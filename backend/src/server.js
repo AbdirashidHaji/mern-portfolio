@@ -24,38 +24,35 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // CORS
 app.use(cors({
-  origin: true, // Allow all origins in production for easier debugging, or set to specific URL
+  origin: true,
   credentials: true
 }));
 
 // Security
 app.use(helmet({
-  contentSecurityPolicy: false, // Disable CSP for easier deployment of assets
+  contentSecurityPolicy: false,
 }));
 
-// Request Sanitization (Simple version for serverless)
-app.use((req, res, next) => {
-  if (req.body) {
-    for (const key in req.body) {
-      if (key.startsWith('$')) delete req.body[key];
-    }
+// DB Connection Middleware - MUST be before routes
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('Database connection error in middleware:', error);
+    res.status(500).json({ success: false, error: 'Database connection failed' });
   }
-  next();
 });
-
-// Rate limiting (Disabled for API routes in serverless to avoid state issues, or use smaller limits)
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/api', limiter);
-}
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Health check (no DB needed usually, but the middleware above will check it)
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', serverless: true });
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -64,37 +61,32 @@ app.use('/api/skills', skillRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok', serverless: true });
-});
-
-// Middleware to connect to DB on every request if not connected
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Error handling
 app.use(errorHandler);
 
-// Only listen if running locally
+// Background initialization
+const initialize = async () => {
+  try {
+    await connectDB();
+    await initAdmin();
+    console.log('✅ Initialization complete');
+  } catch (err) {
+    console.error('❌ Initialization failed:', err.message);
+  }
+};
+
+// Start server or export
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 5000;
-  connectDB().then(() => {
-    initAdmin();
+  initialize().then(() => {
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
   });
 } else {
-  // In production (Vercel), we just export. 
-  // We should probably run initAdmin periodically or via a separate script, 
-  // but for now, let's just ensure DB is connected.
-  connectDB();
+  // In Vercel, we trigger initialization but don't block the export
+  // The middleware above handles ensuring DB is connected for requests
+  initialize();
 }
 
 export default app;

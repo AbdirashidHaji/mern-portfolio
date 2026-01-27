@@ -16,7 +16,11 @@ const connectDB = async () => {
 
   if (!cached.promise) {
     const opts = {
-      bufferCommands: false,
+      // Remove bufferCommands: false to allow Mongoose to buffer queries 
+      // until the connection is established, preventing the "bufferCommands = false" error.
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
     };
 
     cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {

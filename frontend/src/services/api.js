@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://127.0.0.1:5000/api');
 
 const api = axios.create({
   baseURL: API_URL,
@@ -27,7 +27,7 @@ api.interceptors.response.use(
   (response) => response.data,
   (error) => {
     const message = error.response?.data?.error || error.message || 'Something went wrong';
-    
+
     if (error.response?.status === 401) {
       localStorage.removeItem('portfolio-token');
       localStorage.removeItem('portfolio-admin');
@@ -35,7 +35,7 @@ api.interceptors.response.use(
         window.location.href = '/admin/login';
       }
     }
-    
+
     return Promise.reject({ message, status: error.response?.status });
   }
 );

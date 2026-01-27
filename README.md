@@ -1,28 +1,32 @@
 # 🚀 MERN Portfolio – Admin-Driven Full-Stack Application
 
-A **production-ready MERN Stack portfolio application** featuring a secure admin dashboard, dynamic content management (projects & skills), authentication, and email integration. Built to demonstrate real-world full-stack engineering practices.
+A **production-ready MERN Stack portfolio application** built to showcase real-world full-stack engineering skills.  
+It features a secure admin dashboard, dynamic content management, authentication, email integration, and a modern responsive UI with light/dark mode support.
+
+🌐 **Live Site:** https://abdirashid-portfolio.vercel.app/
 
 ---
 
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
-- JWT-based authentication (Access & Refresh tokens)
+- JWT-based authentication (Access & Refresh Tokens)
 - Role-based access control (Admin vs Public)
-- Secure password hashing with bcrypt
+- Secure password hashing using bcrypt
 - Protected admin-only routes
 
 ### 🧑‍💼 Admin Dashboard
 - Add, edit, and delete **projects**
 - Add, edit, and delete **skills**
-- Content updates reflected instantly on the public portfolio
+- Real-time updates reflected on the public portfolio
 - Admin-only access secured with JWT & role checks
 
 ### 🌐 Public Portfolio
 - Dynamic projects section (CMS-driven)
-- Skills categorized by stack (Frontend, Backend, Database, Tools)
-- Responsive, mobile-first UI
-- Clean and professional design
+- Skills categorized by stack
+- Fully responsive, mobile-first UI
+- Light & Dark mode support
+- Clean, professional design
 
 ### 📧 Email System
 - SMTP-powered contact form
@@ -55,8 +59,26 @@ A **production-ready MERN Stack portfolio application** featuring a secure admin
 - JWT Authentication
 - Nodemailer (SMTP)
 
-### Tools & DevOps
+### Tools
+- Visual Studio Code
 - Git & GitHub
 - dotenv
 - Nodemon
+- Postman
+
+### DevOps & Deployment
+- Vercel (Frontend & Backend)
+- Environment-based configuration
+- Production-ready build setup
+
 ---
+
+## 📸 Screenshots
+
+### 🌞 Light Mode
+![Light Mode Screenshot](frontend/src/assets/AMH-light_mode.png)
+
+### 🌙 Dark Mode
+![Dark Mode Screenshot](frontend/src/assets/AMH-Dark_mode.png)
+
+

@@ -25,36 +25,37 @@ const AboutPage = () => {
   const experience = [
     {
       year: '2023 - Present',
-      role: 'Full Stack Developer',
-      company: 'Freelance',
-      description: 'Building web applications for clients using MERN stack, providing end-to-end solutions from concept to deployment.',
-    },
-    {
-      year: '2022 - 2023',
-      role: 'Frontend Developer',
-      company: 'Tech Solutions Ltd',
-      description: 'Developed responsive user interfaces for SaaS products using React and modern frontend technologies.',
-    },
-    {
-      year: '2021 - 2022',
-      role: 'Web Developer Intern',
-      company: 'Digital Agency',
-      description: 'Assisted in building websites and web applications, learning best practices in web development.',
+      role: 'Junior Full-Stack Developer (MERN)',
+      company: 'self-employed- Personal Projects',
+      description: 'Built full-stack web applications using React, Node.js, Express, and MongoDB,Integrated backend services with frontend components and managed application state',
     },
   ];
 
   const education = [
     {
-      degree: 'Bachelor of Computer Science',
-      school: 'University of Nairobi',
-      year: '2018 - 2022',
+      certificate: 'Certified Fiber Optic Technician',
+      school: 'Institute Of Software Technologies',
+      year: '2025',
+      description: 'Focused on fiber optic installation, maintenance, and troubleshooting techniques',
+    },
+
+    {
+      diploma: 'Diploma in Software Development',
+      school: 'Institute Of Software Technologies',
+      year: 'Sep 2023 - Oct 2024',
       description: 'Specialized in Software Engineering and Web Technologies',
     },
     {
-      degree: 'Full Stack Development',
-      school: 'Online Certification',
-      year: '2022',
-      description: 'MERN Stack Specialization',
+      certificate: 'Certificate in Software Development',
+      school: 'Institute Of Software Technologies',
+      year: '2023',
+      description: 'Focused on foundational programming and web development skills',
+    },
+    {
+      certificate: 'Certificate in Computer Applications Packages',
+      school: 'Inceptor Institute Of Technologies',
+      year: '2023',
+      description: 'Covered essential computer applications and office productivity tools',
     },
   ];
 

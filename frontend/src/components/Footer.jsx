@@ -74,9 +74,6 @@ const Footer = () => {
           <p className="text-gray-500 dark:text-gray-500 text-sm">
             &copy; {currentYear} Abdirashid Mohamed Haji. All rights reserved.
           </p>
-          <p className="text-gray-400 dark:text-gray-600 text-sm mt-1">
-            Built with React, Node.js, and ❤️
-          </p>
         </div>
       </div>
     </footer>

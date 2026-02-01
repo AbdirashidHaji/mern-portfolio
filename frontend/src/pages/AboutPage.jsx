@@ -33,26 +33,26 @@ const AboutPage = () => {
 
   const education = [
     {
-      certificate: 'Certified Fiber Optic Technician',
+      degree: 'Certified Fiber Optic Technician',
       school: 'Institute Of Software Technologies',
       year: '2025',
       description: 'Focused on fiber optic installation, maintenance, and troubleshooting techniques',
     },
 
     {
-      diploma: 'Diploma in Software Development',
+      degree: 'Diploma in Software Development',
       school: 'Institute Of Software Technologies',
       year: 'Sep 2023 - Oct 2024',
       description: 'Specialized in Software Engineering and Web Technologies',
     },
     {
-      certificate: 'Certificate in Software Development',
+      degree: 'Certificate in Software Development',
       school: 'Institute Of Software Technologies',
       year: '2023',
       description: 'Focused on foundational programming and web development skills',
     },
     {
-      certificate: 'Certificate in Computer Applications Packages',
+      degree: 'Certificate in Computer Applications Packages',
       school: 'Inceptor Institute Of Technologies',
       year: '2023',
       description: 'Covered essential computer applications and office productivity tools',
@@ -68,7 +68,7 @@ const AboutPage = () => {
             About Me
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Passionate Full Stack Developer from Kenya, dedicated to creating impactful digital solutions 
+            Passionate Full Stack Developer from Kenya, dedicated to creating impactful digital solutions
             that solve real-world problems.
           </p>
         </div>
@@ -83,18 +83,18 @@ const AboutPage = () => {
               </h2>
               <div className="space-y-4 text-gray-700 dark:text-gray-300">
                 <p>
-                  I'm a passionate Full Stack Developer based in Nairobi, Kenya, with expertise in 
+                  I'm a passionate Full Stack Developer based in Nairobi, Kenya, with expertise in
                   building modern web applications using the MERN stack (MongoDB, Express.js, React.js, Node.js).
                 </p>
                 <p>
-                  My journey into software development started with a curiosity about how technology 
-                  can solve real-world problems and create meaningful impact in our communities. 
-                  Since then, I've been on a continuous learning path, mastering new technologies 
+                  My journey into software development started with a curiosity about how technology
+                  can solve real-world problems and create meaningful impact in our communities.
+                  Since then, I've been on a continuous learning path, mastering new technologies
                   and best practices.
                 </p>
                 <p>
-                  I believe in writing clean, maintainable code and following best practices in 
-                  software development. My approach involves thorough planning, iterative development, 
+                  I believe in writing clean, maintainable code and following best practices in
+                  software development. My approach involves thorough planning, iterative development,
                   and continuous testing to ensure high-quality results.
                 </p>
               </div>
@@ -111,7 +111,7 @@ const AboutPage = () => {
                   <div key={index} className="relative pl-8 pb-8 last:pb-0">
                     <div className="absolute left-0 top-1 w-4 h-4 bg-primary-500 rounded-full border-4 border-white dark:border-gray-800"></div>
                     <div className="absolute left-2 top-5 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
-                    
+
                     <div className="mb-2">
                       <span className="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium mb-2">
                         {exp.year}
@@ -175,7 +175,7 @@ const AboutPage = () => {
                     <p className="font-medium text-gray-900 dark:text-white">Nairobi, Kenya</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                     <Globe className="w-5 h-5 text-gray-600 dark:text-gray-400" />
@@ -185,7 +185,7 @@ const AboutPage = () => {
                     <p className="font-medium text-gray-900 dark:text-white">EAT (UTC+3)</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg">
                     <Users className="w-5 h-5 text-gray-600 dark:text-gray-400" />
@@ -203,7 +203,7 @@ const AboutPage = () => {
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                 Skills Overview
               </h3>
-              
+
               {loading ? (
                 <div className="py-4">
                   <LoadingSpinner size="sm" text="" />
@@ -213,11 +213,11 @@ const AboutPage = () => {
                   {['frontend', 'backend', 'database', 'devops'].map((category) => {
                     const categorySkills = skills.filter(skill => skill.category === category);
                     if (categorySkills.length === 0) return null;
-                    
+
                     const avgProficiency = Math.round(
                       categorySkills.reduce((sum, skill) => sum + skill.proficiency, 0) / categorySkills.length
                     );
-                    
+
                     return (
                       <div key={category}>
                         <div className="flex justify-between items-center mb-2">

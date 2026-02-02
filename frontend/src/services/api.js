@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.PROD ? '/api' : (import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000/api');
+// Use environment variable or fallback to relative path in production
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://127.0.0.1:5000/api');
+
+console.log('API Configuration:', {
+  mode: import.meta.env.MODE,
+  isProd: import.meta.env.PROD,
+  apiUrl: API_URL,
+  envViteApiUrl: import.meta.env.VITE_API_URL
+});
 
 const api = axios.create({
   baseURL: API_URL,

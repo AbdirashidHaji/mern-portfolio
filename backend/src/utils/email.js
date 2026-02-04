@@ -3,18 +3,36 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
+// Validate required environment variables
+const requiredEnvVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'EMAIL_FROM', 'ADMIN_EMAIL'];
+const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+
+if (missingVars.length > 0) {
+  console.error('❌ Missing email environment variables:', missingVars.join(', '));
+}
+
+let transporter;
+try {
+  transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+} catch (error) {
+  console.error('❌ Failed to create email transporter:', error.message);
+}
 
 export const sendContactEmail = async ({ name, email, subject, message }) => {
   try {
+    // Check if email is configured
+    if (!transporter) {
+      throw new Error('Email service is not configured. Please contact the administrator.');
+    }
+
     // Email to admin
     const adminMailOptions = {
       from: `"${name}" <${process.env.EMAIL_FROM}>`,
@@ -50,7 +68,7 @@ export const sendContactEmail = async ({ name, email, subject, message }) => {
 
     await transporter.sendMail(adminMailOptions);
     await transporter.sendMail(autoReplyOptions);
-    
+
     return { success: true };
   } catch (error) {
     console.error('Email sending error:', error);

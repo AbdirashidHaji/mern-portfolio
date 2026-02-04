@@ -5,7 +5,7 @@ dotenv.config();
 
 // Validate required environment variables
 const requiredEnvVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'EMAIL_FROM', 'ADMIN_EMAIL'];
-const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+const missingVars = requiredEnvVars.filter(varName => !process.env[varName]?.trim());
 
 if (missingVars.length > 0) {
   console.error('❌ Missing email environment variables:', missingVars.join(', '));
@@ -13,15 +13,23 @@ if (missingVars.length > 0) {
 
 let transporter;
 try {
+  // Sanitize environment variables to remove hidden chars like \r\n
+  const smtpHost = process.env.SMTP_HOST?.trim();
+  const smtpPort = process.env.SMTP_PORT?.trim();
+  const smtpUser = process.env.SMTP_USER?.trim();
+  const smtpPass = process.env.SMTP_PASS?.trim();
+
   transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false,
+    host: smtpHost,
+    port: smtpPort,
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
+      user: smtpUser,
+      pass: smtpPass
     }
   });
+
+  console.log(`✅ Email transporter initialized with host: '${smtpHost}'`);
 } catch (error) {
   console.error('❌ Failed to create email transporter:', error.message);
 }

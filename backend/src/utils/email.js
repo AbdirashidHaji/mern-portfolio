@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer'; // Email utility
 import dotenv from 'dotenv';
 
 dotenv.config();
